@@ -65,23 +65,46 @@ function App() {
     mapRef.current.style.top = `-${mapPosition?.y}px`;
   }, [mapPosition]);
 
+  let posX = 0;
+  let posY = 0;
+
+  // const [posX, setPosX] = useState(0);
+  // const [posY, setPosY] = useState(0);
   // setPotition에 오류가 있음.
   const onMoveMap = (e) => {
-    const mapClientX = e.clientX;
-    console.log("🚀 ~ file: App.js ~ line 72 ~ onMoveMap ~ e", e);
-    console.log("mapClientX :", mapClientX);
-    console.log("mapPosition :", mapPosition);
-    const mapClientY = e.clientY;
-    const offsetLeft = e.screenX;
-    const offsetTop = e.screenY;
-    if (mapClientX !== 0 || mapClientY !== 0) {
-      setMapPosition((prev) => {
-        return {
-          x: mapClientX / 2 - MAP_WINDOW_WIDTH / 2 + offsetLeft,
-          y: mapClientY / 2 - MAP_WINDOW_HEIGHT / 2 + offsetTop,
-        };
-      });
+    // const mapClientX = e.clientX;
+    // console.log("🚀 ~ file: App.js ~ line 72 ~ onMoveMap ~ e", e);
+    // console.log("mapClientX :", mapClientX);
+    // console.log("mapPosition :", mapPosition);
+    // const mapClientY = e.clientY;
+    console.log(e);
+    console.log(
+      "🚀 ~ file: App.js ~ line 82 ~ onMoveMap ~ e.target.offsetLeft",
+      e.target.offsetLeft
+    );
+
+    console.log("1212", windowRef.current.getBoundingClientRect().x);
+
+    if (e.clientX && e.clientY) {
+      e.target.style.left = `${e.target.offsetLeft + e.clientX - posX}px`;
+      e.target.style.top = `${e.target.offsetTop + e.clientY - posY}px`;
+
+      posX = e.clientX;
+      posY = e.clientY;
     }
+
+    // setPosX(e.clientX);
+    // setPosY(e.clientY);
+
+    console.log("hello ");
+    // if (mapClientX !== 0 || mapClientY !== 0) {
+    //   setMapPosition((prev) => {
+    //     return {
+    //       x: e.target.offsetLeft + e.clientY - ,
+    //       y: e.target.offsetTop + e.clientY - ,
+    //     };
+    //   });
+    // }
     // window.addEventListener("mousemove", setPosition);
   };
 
