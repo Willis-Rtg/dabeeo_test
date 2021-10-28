@@ -60,10 +60,10 @@ function App() {
       y: mapRef.current.clientHeight / 2 - MAP_WINDOW_HEIGHT / 2,
     });
   }, []);
-  useEffect(() => {
-    mapRef.current.style.left = `-${mapPosition?.x}px`;
-    mapRef.current.style.top = `-${mapPosition?.y}px`;
-  }, [mapPosition]);
+  // useEffect(() => {
+  //   mapRef.current.style.left = `-${mapPosition?.x}px`;
+  //   mapRef.current.style.top = `-${mapPosition?.y}px`;
+  // }, [mapPosition]);
 
   let posX = 0;
   let posY = 0;
@@ -77,6 +77,7 @@ function App() {
     // console.log("mapClientX :", mapClientX);
     // console.log("mapPosition :", mapPosition);
     // const mapClientY = e.clientY;
+    e.preventDefault();
     console.log(e);
     console.log(
       "🚀 ~ file: App.js ~ line 82 ~ onMoveMap ~ e.target.offsetLeft",
@@ -85,7 +86,7 @@ function App() {
 
     console.log("1212", windowRef.current.getBoundingClientRect().x);
 
-    if (e.clientX && e.clientY) {
+    if (e.clientX !== 0 || e.clientY !== 0) {
       e.target.style.left = `${e.target.offsetLeft + e.clientX - posX}px`;
       e.target.style.top = `${e.target.offsetTop + e.clientY - posY}px`;
 
